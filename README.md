@@ -1,4 +1,4 @@
-# KopiPal ☕
+# KopiPal! ☕
 
 **Never kopi alone.** KopiPal helps lonely people find a *kopi kaki* (coffee buddy) for small, in-person café sessions in Singapore. The oldest problem with meetups is flaking, so **PayPal is the product's trust layer**: every guest puts a small show-up deposit on hold, and the money moves based on who actually turns up.
 
