@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KopiPal: never kopi alone</title>
+<meta name="description" content="Find a kopi kaki. Join small café meetups where a PayPal show-up deposit makes sure nobody gets stood up.">
+<meta name="theme-color" content="#d4382d"><meta property="og:title" content="KopiPal: never kopi alone"><meta property="og:description" content="Join small kopi sessions. Show up and pay nothing. Flake and the person you left waiting gets a kopi on you.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>☕</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf1e8;--card:#fff;--ink:#2a1d16;--mute:#6b5d54;--red:#d4382d;--teal:#1d6b6e;--line:#c4d3cd;--coffee:#7a4a2b;--b1:#ffd3c4;--b2:#c6ecdf;--b3:#ffe6a3}
+@media(prefers-color-scheme:dark){:root{--bg:#121c1b;--card:#1b2827;--ink:#f1ebe3;--mute:#a9b8b3;--red:#ef6a5e;--teal:#5fc3c7;--line:#2f4442;--coffee:#b98458;--b1:#3d2433;--b2:#17383c;--b3:#3d3522}}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.55 Nunito,system-ui,sans-serif;background-color:var(--bg);background-image:radial-gradient(circle at 10% 6%,var(--b1) 0,transparent 36%),radial-gradient(circle at 92% 18%,var(--b2) 0,transparent 34%),radial-gradient(circle at 15% 88%,var(--b3) 0,transparent 38%),radial-gradient(circle at 88% 92%,var(--b1) 0,transparent 34%);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;z-index:-2;opacity:.55;background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' fill='none' stroke='%23c08a62' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><g transform='translate(28 46) rotate(-12)'><path d='M0 8h26v12a10 10 0 0 1-10 10h-6a10 10 0 0 1-10-10z'/><path d='M26 12h3a5 5 0 0 1 0 10h-3'/><path d='M8 0q-3-4 0-7M16 0q-3-4 0-7'/></g><g transform='translate(160 34) rotate(22)'><ellipse rx='7' ry='10'/><path d='M0-9q-4 9 0 18'/></g><path d='M118 128c-12-9-18-16-12-23 5-5 10-2 12 2 2-4 7-7 12-2 6 7 0 14-12 23z'/><path d='M200 150l3 8 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1z'/><path d='M24 176c10-12 20 12 30 0s20 12 30 0'/><circle cx='186' cy='216' r='3'/><circle cx='70' cy='122' r='2.5'/><g transform='translate(120 205) rotate(30)'><ellipse rx='6' ry='9'/><path d='M0-8q-3 8 0 16'/></g></svg>");background-size:240px 240px}
+@media(prefers-color-scheme:dark){body::before{opacity:.22}}
+.bg span{position:fixed;z-index:-1;font-size:2.1rem;opacity:.55;animation:float 9s ease-in-out infinite;user-select:none}
+@keyframes float{50%{transform:translateY(-18px) rotate(10deg)}}
+main{max-width:980px;margin:auto;padding:20px 16px 70px}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;margin:.3em 0}
+h1{font-size:clamp(2.1rem,6.5vw,3.6rem);line-height:1.03;font-weight:800;margin:0 0 .2em}h1 span{color:var(--red)}h2{margin-top:38px}
+.hero{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin:10px 0 22px}.lead{font-size:1.12rem;max-width:52ch;color:var(--mute);margin:0}
+.cup{width:150px;flex:none;cursor:pointer;overflow:visible}.cup:hover{animation:wiggle .7s}
+.steam{fill:none;stroke:var(--mute);stroke-width:4;stroke-linecap:round;stroke-dasharray:40;animation:steam 3s ease-in-out infinite}.s2{animation-delay:.9s}.s3{animation-delay:1.8s}
+.eye{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+@keyframes steam{0%{stroke-dashoffset:40;opacity:0}40%{opacity:.9}100%{stroke-dashoffset:-40;opacity:0}}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes wiggle{20%{transform:rotate(-7deg)}50%{transform:rotate(6deg)}80%{transform:rotate(-3deg)}}
+@keyframes pop{40%{transform:scale(1.2) rotate(-4deg)}}
+@keyframes bounce{0%{transform:translate(-50%,40px);opacity:0}60%{transform:translate(-50%,-8px);opacity:1}100%{transform:translate(-50%,0)}}
+.steps,.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.step,.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 4px 0 var(--line);transition:transform .2s,box-shadow .2s}
+.step:hover,.card:hover{transform:translateY(-5px) rotate(-.6deg);box-shadow:0 10px 0 var(--line)}
+.step b{font-size:1.05rem}.step p{margin:.2em 0;color:var(--mute)}.step i{font-style:normal;font-size:1.6rem;display:inline-block}.step:hover i{animation:wiggle .6s}
+.card.pick{border-color:var(--red);box-shadow:0 4px 0 var(--red)}.card p{margin:.4em 0}
+input[type=text],input[type=email],input:not([type]),select{font:inherit;padding:10px 14px;border-radius:99px;border:2px solid var(--line);background:var(--card);color:var(--ink);width:100%;max-width:380px;transition:border-color .2s,box-shadow .2s}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 4px color-mix(in srgb,var(--teal) 25%,transparent)}
+button{font:inherit;font-weight:700;padding:10px 20px;border-radius:99px;border:0;background:var(--red);color:#fff;cursor:pointer;box-shadow:0 4px 0 color-mix(in srgb,var(--red) 60%,#000);transition:transform .12s,box-shadow .12s}
+button:hover{transform:translateY(-2px) rotate(-1deg)}button:active{transform:translateY(3px) scale(.96);box-shadow:0 1px 0 color-mix(in srgb,var(--red) 60%,#000)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}.opt{position:relative;display:inline-block}
+.opt input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.opt span{display:inline-block;padding:7px 15px;border-radius:99px;background:var(--card);border:2px solid var(--line);transition:transform .15s,background .15s}
+.opt:hover span{transform:translateY(-3px) rotate(-2deg)}
+.opt input:checked+span{background:var(--red);border-color:var(--red);color:#fff;animation:pop .35s}
+.opt input:focus-visible+span{outline:3px solid var(--teal);outline-offset:2px}
+.q{margin:4px 0}.q b{display:block}.panel{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 4px 0 var(--line)}
+.chip{display:inline-block;background:var(--line);border-radius:99px;padding:1px 11px;margin:0 4px 4px 0;font-size:.85rem}
+.seat{opacity:.22;filter:grayscale(1);display:inline-block;transition:transform .2s}.seat.on{opacity:1;filter:none}.card:hover .seat.on{transform:translateY(-3px)}
+.m,small{color:var(--mute)}.dep{background:color-mix(in srgb,var(--teal) 14%,transparent);border-radius:12px;padding:6px 12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.code{font:800 2.6rem 'Bricolage Grotesque',sans-serif;letter-spacing:.2em;color:var(--red)}
+#why{margin-top:12px}
+#toast{position:fixed;bottom:18px;left:50%;background:var(--ink);color:var(--bg);padding:12px 22px;border-radius:99px;display:none;z-index:30;max-width:92vw;font-weight:700}#toast.on{display:block;animation:bounce .45s}
+.bean{position:fixed;width:9px;height:13px;border-radius:50%;background:var(--coffee);box-shadow:inset 0 0 0 1px #3d2212;pointer-events:none;z-index:25}
+ul{padding-left:0;list-style:none}li{margin:6px 0;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:8px 12px;font-size:.92rem}li.new{animation:pop .5s}li code{color:var(--mute);font-size:.78rem;word-break:break-all}
+.cupwrap{position:relative;flex:none}
+.bubble{position:absolute;left:72%;top:-14px;background:var(--card);border:2px solid var(--ink);border-radius:16px 16px 16px 4px;padding:6px 12px;font-weight:700;width:max-content;max-width:190px;opacity:0;transform:scale(.6);transform-origin:bottom left;transition:opacity .2s,transform .2s;pointer-events:none;z-index:2}.bubble.on{opacity:1;transform:scale(1)}
+.hi{font-weight:700;color:var(--teal);margin:0 0 4px}.stats{margin:12px 0 0;color:var(--mute)}.stats b{color:var(--ink)}
+.code{cursor:copy}.foot{margin-top:50px;text-align:center;color:var(--mute);font-size:.9rem}
+.rcpt-bg{position:fixed;inset:0;background:#0008;display:grid;place-items:center;z-index:40;padding:16px}
+.rcpt{background:#fffdf6;color:#2a1d16;width:min(350px,100%);padding:20px 20px 30px;font:14px/1.5 ui-monospace,Menlo,monospace;transform-origin:top;animation:print .8s cubic-bezier(.2,.8,.3,1);-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%}
+.rcpt h3{text-align:center;margin:0}.rcpt .m{color:#6b5d54;text-align:center;margin:.3em 0}.rcpt hr{border:0;border-top:2px dashed #cbbfa8;margin:10px 0}.rcpt .ln{display:flex;justify-content:space-between;gap:10px}.rcpt button{display:block;margin:12px auto 0}
+@keyframes print{from{transform:translateY(-40px) scaleY(.2);opacity:0}}
+html{scroll-behavior:smooth}[id]{scroll-margin-top:84px}
+.nav{position:sticky;top:0;z-index:15;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:2px solid var(--line)}
+.navin{max-width:980px;margin:auto;padding:8px 16px;display:flex;align-items:center;gap:18px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font:800 1.4rem 'Bricolage Grotesque',sans-serif}.logo b{color:var(--red)}.logo:hover svg{animation:wiggle .6s}
+.links{display:flex;gap:4px;flex:1;justify-content:center;flex-wrap:wrap}.links a{color:var(--ink);text-decoration:none;font-weight:700;padding:5px 12px;border-radius:99px;transition:background .15s,transform .15s}.links a:hover{background:var(--line);transform:translateY(-2px)}
+.pill{margin-left:auto;background:var(--teal);color:#fff;border-radius:99px;padding:3px 12px;font-size:.8rem;font-weight:700;white-space:nowrap}
+@media(prefers-color-scheme:dark){.pill{color:#0b1f20}}
+.strip{background:color-mix(in srgb,var(--teal) 16%,transparent);text-align:center;padding:6px 12px;font-size:.9rem}.strip button{padding:2px 12px;box-shadow:none;margin-left:8px;font-size:.82rem}
+@media(max-width:700px){.links{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style></head><body><div class="bg" aria-hidden="true"><span style="left:4%;top:18%">☕</span><span style="left:92%;top:30%;animation-delay:-3s">🥐</span><span style="left:6%;top:62%;animation-delay:-5s">🍞</span><span style="left:90%;top:70%;animation-delay:-2s">🧋</span><span style="left:48%;top:92%;animation-delay:-6s">✨</span><span style="left:80%;top:8%;animation-delay:-4s">💛</span><span style="left:30%;top:6%;animation-delay:-7s">🫘</span></div>
+<nav class="nav"><div class="navin"><a class="logo" href="#top" aria-label="KopiPal home"><svg viewBox="0 0 64 64" width="36" height="36" aria-hidden="true"><ellipse cx="30" cy="57" rx="25" ry="4" fill="var(--line)"/><path d="M44 30h5a7 7 0 0 1 0 14h-6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M10 26h34v14a14 14 0 0 1-14 14h-6a14 14 0 0 1-14-14z" fill="var(--red)" stroke="currentColor" stroke-width="3"/><path d="M19 40q6 6 12 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M20 19q-4-4 0-8M30 19q-4-4 0-8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><span>Kopi<b>Pal</b></span></a>
+<div class="links"><a href="#match">Find a kaki</a><a href="#list">Sessions</a><a href="#host">Host</a><a href="#mine">My sessions</a><a href="#led">Activity</a></div>
+<span class="pill" title="Runs on PayPal Sandbox. No real money moves.">Sandbox demo</span></div></nav>
+<div class="strip">Demo mode: this runs on PayPal Sandbox, so no real money moves. Pay with a sandbox buyer account.<button onclick="this.parentElement.remove()">Got it</button></div>
+<main>
+<header class="hero" id="top">
+<div class="cupwrap"><div class="bubble" id="bub"></div>
+<svg class="cup" viewBox="0 0 160 150" aria-hidden="true" onclick="cupTap()">
+<path class="steam" d="M56 50q-10-10 0-20q10-10 0-20"/><path class="steam s2" d="M76 50q-10-10 0-20q10-10 0-20"/><path class="steam s3" d="M96 50q-10-10 0-20q10-10 0-20"/>
+<ellipse cx="76" cy="140" rx="64" ry="8" fill="var(--line)"/>
+<path d="M122 76h12a16 16 0 0 1 0 32h-16" fill="none" stroke="var(--ink)" stroke-width="5"/>
+<path d="M30 62h92v36a36 36 0 0 1-36 36h-20a36 36 0 0 1-36-36z" fill="var(--card)" stroke="var(--ink)" stroke-width="5"/>
+<ellipse cx="76" cy="62" rx="46" ry="9" fill="var(--coffee)" stroke="var(--ink)" stroke-width="4"/>
+<ellipse class="eye" cx="62" cy="100" rx="4" ry="5" fill="var(--ink)"/><ellipse class="eye" cx="90" cy="100" rx="4" ry="5" fill="var(--ink)"/>
+<path d="M67 111q9 9 18 0" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>
+<circle cx="53" cy="110" r="5" fill="#ef8f86" opacity=".7"/><circle cx="99" cy="110" r="5" fill="#ef8f86" opacity=".7"/></svg></div>
+<div><p class="hi" id="hi"></p><h1>Kopi alone? <span>Find your kopi kaki.</span></h1>
+<p class="lead">Join a small kopi session near you. A tiny PayPal deposit keeps everyone honest, so nobody sits alone with a cold cup.</p><p class="stats" id="stats"></p></div></header>
+<div class="steps">
+<div class="step"><i>🔒</i><br><b>Join with a PayPal hold</b><p>Your deposit is authorized, not charged.</p></div>
+<div class="step"><i>📍</i><br><b>Show up and enter the code</b><p>Your hold is released. You pay nothing.</p></div>
+<div class="step"><i>💸</i><br><b>Someone no-shows?</b><p>Their deposit is paid out to the kaki who waited.</p></div>
+</div>
+
+<h2>Hi, I’m…</h2>
+<input id="name" placeholder="Your first name" aria-label="Your first name" autocomplete="given-name">
+
+<h2>Help me find a kaki</h2>
+<form class="panel" id="match">
+<div class="q"><b>How are you feeling?</b><div class="opts" id="o-mood"></div></div>
+<div class="q"><b>What do you like? (pick any)</b><div class="opts" id="o-int"></div></div>
+<button>Find my kaki</button><div id="why"></div></form>
+
+<h2>Open sessions</h2>
+<div class="grid" id="list"></div>
+
+<h2>Host a session</h2>
+<form class="panel" id="host">
+<div class="q"><b>What are you drinking?</b><div class="opts" id="o-drink"></div></div>
+<div class="q"><b>Where?</b><select name="cafe" id="cafe" aria-label="Café"></select> <input id="cafe2" name="cafe2" placeholder="Café name and area" style="display:none;margin-top:8px"></div>
+<div class="q" style="margin-top:12px"><b>When?</b><select name="when" id="when" aria-label="Time"></select></div>
+<div class="q" style="margin-top:12px"><b>Vibe (pick any)</b><div class="opts" id="o-vibe"></div></div>
+<div class="q"><b>Show-up deposit</b><div class="opts" id="o-dep"></div></div>
+<div class="q"><b>Seats</b><div class="opts" id="o-max"></div></div>
+<div class="q"><b>Your PayPal email</b><small>Where you’ll get a kopi if someone leaves you waiting. We’ll remember it.</small><br><input type="email" name="hostEmail" id="email" placeholder="you@example.com" required></div>
+<p><button>Host this session</button></p></form>
+
+<h2>Sessions I host</h2>
+<div class="grid" id="mine"></div>
+
+<h2>Live PayPal activity</h2>
+<ul id="led"></ul>
+<p class="foot">Made with ☕ in Singapore for the PayPal AI Hackathon. Sandbox only, no real money. Psst, try ↑ ↑ ↓ ↓ ← → ← → B A, or just type “kopi”.</p></main><div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let me=localStorage.getItem('kp_name')||'',cfg,pick,sessions=[],hosted=JSON.parse(localStorage.getItem('kp_hosted')||'[]'),lx=innerWidth/2,ly=innerHeight/2,seen=new Set();
+addEventListener('click',e=>{lx=e.clientX;ly=e.clientY},true);
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.remove('on');void t.offsetWidth;t.classList.add('on');clearTimeout(t.h);t.h=setTimeout(()=>t.classList.remove('on'),5000)};
+function burst(center){if(center){lx=innerWidth/2;ly=innerHeight*.6}for(let i=0;i<18;i++){const b=document.createElement('i');b.className='bean';b.style.left=lx+'px';b.style.top=ly+'px';document.body.append(b);const a=Math.random()*6.28,d=50+Math.random()*90;b.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d+50}px) rotate(${Math.random()*360}deg) scale(.4)`,opacity:0}],{duration:950,easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish=()=>b.remove()}}
+async function api(p,b){const r=await fetch(p,b?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}:{});const j=await r.json();if(!r.ok)throw new Error(j.error||'Something went wrong');return j}
+const run=f=>async(...a)=>{try{await f(...a)}catch(e){toast(e.message)}};
+const when=s=>new Date(s).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'});
+const opts=(id,name,type,items,def)=>$('#'+id).innerHTML=items.map(([v,l,t])=>`<label class="opt"><input type="${type}" name="${name}" value="${esc(v)}" ${[].concat(def||[]).includes(v)?'checked':''}><span title="${esc(t||'')}">${l}</span></label>`).join('');
+
+opts('o-mood','mood','radio',[['a bit lonely','😔 A bit lonely'],['new in town','🧳 New in town'],['want to chat','💬 Up for a chat'],['just chilling','😌 Just chilling']],'a bit lonely');
+opts('o-int','int','checkbox',['Tech','Startups','Running','Books','K-dramas','Gaming','Food','Careers'].map(x=>[x,x]));
+opts('o-drink','drink','radio',[['Kopi-O','☕ Kopi-O','Black coffee with sugar'],['Kopi-C','🥛 Kopi-C','Coffee with evaporated milk and sugar'],['Kopi Siew Dai','🍬 Kopi Siew Dai','Coffee with milk, less sugar'],['Kopi Kosong','🖤 Kopi Kosong','Coffee with milk, no sugar'],['Teh Tarik','🫖 Teh Tarik','“Pulled” frothy milk tea'],['Milo','🍫 Milo','Malty chocolate drink'],['Yuan Yang','🌓 Yuan Yang','Half coffee, half tea']],'Kopi-O');
+opts('o-vibe','vibe','checkbox',['Quiet','Chatty','First-timers welcome','Tech talk','Career chat'].map(x=>[x.toLowerCase(),x]));
+opts('o-dep','deposit','radio',[['2','$2'],['3','$3'],['5','$5']],'3');
+opts('o-max','max','radio',[['2','2 people'],['3','3 people'],['4','4 people']],'3');
+$('#cafe').innerHTML=['Ya Kun Kaya Toast, Far East Square','Toast Box, Tiong Bahru Plaza','Kopitiam, Tampines Hub','The Coffee Bean, Raffles Place','Starbucks, Orchard Road'].map(x=>`<option>${x}</option>`).join('')+'<option value="__other">Somewhere else…</option>';
+$('#cafe').onchange=e=>$('#cafe2').style.display=e.target.value==='__other'?'':'none';
+{const n=new Date(),o=[];n.setMinutes(0,0,0);[2,3,4].forEach(h=>o.push(new Date(+n+h*36e5)));const t=new Date();t.setDate(t.getDate()+1);[8,10,15].forEach(h=>{const d=new Date(t);d.setHours(h,0,0,0);o.push(d)});
+$('#when').innerHTML=o.map(d=>`<option value="${d.toISOString()}">${when(d)}</option>`).join('')}
+$('#email').value=localStorage.getItem('kp_email')||'';
+
+function card(s){const mine=s.people.find(p=>p.name===me),full=s.people.length>=s.max;
+return `<article class="card ${s.id===pick?'pick':''}"><h3>${esc(s.title)}</h3>
+<p class="m">📍 ${esc(s.cafe)}<br>🕒 ${when(s.when)} <small class="rel" data-w="${s.when}">(${rel(s.when)})</small></p><p>Hosted by <b>${esc(s.host)}</b>. Vibe: ${esc(s.vibe)||'easygoing'}.</p>
+<p>${s.people.map(p=>`<span class="chip">${esc(p.name)}${p.checkedIn?' ✓':''}</span>`).join('')||'<em>Be the first kaki!</em>'}</p>
+<p>${Array.from({length:s.max},(_,i)=>`<span class="seat ${i<s.people.length?'on':''}">☕</span>`).join(' ')} <small>${s.people.length}/${s.max} seats</small></p>
+<p class="dep">Show-up deposit <b>${s.currency} ${s.deposit.toFixed(2)}</b>, held not charged</p>
+${s.status==='settled'?'<b>Settled ✨</b>':mine?(mine.checkedIn?'<b>You’re checked in 🎉</b>':`<div class="row"><input id="c-${s.id}" placeholder="4-digit code" inputmode="numeric" maxlength="4" style="max-width:150px"><button onclick="checkin('${s.id}')">Check in</button></div>`):full?'<b>Full, try another!</b>':`<div id="pp-${s.id}"></div>`}</article>`}
+
+async function load(){sessions=await api('/api/sessions');$('#list').innerHTML=sessions.map(card).join('')||'<p class="m">No sessions yet. Host the first one below!</p>';mountPay();mountHost();stats()}
+function mountPay(){if(!window.paypal)return;sessions.forEach(s=>{const el=$('#pp-'+s.id);if(!el)return;
+paypal.Buttons({style:{shape:'pill',height:38,label:'pay'},
+createOrder:async()=>{if(!me)throw new Error('Pop your name in the box at the top first.');return (await api(`/api/sessions/${s.id}/order`,{name:me})).orderId},
+onApprove:async d=>{await api(`/api/sessions/${s.id}/join`,{name:me,orderId:d.orderID});burst(1);toast('You’re in! Your deposit is held, not charged.');load();ledger()},
+onError:e=>toast(e.message||'PayPal error')}).render(el)})}
+function mountHost(){$('#mine').innerHTML=hosted.map(h=>{const s=sessions.find(x=>x.id===h.id);return s?`<div class="card"><h3>${esc(s.title)}</h3><p>Show this code at the café (tap to copy):</p><div class="code" title="Tap to copy" onclick="navigator.clipboard?.writeText('${h.code}');toast('Code copied. Share it at the café!')">${h.code}</div>
+<p>${s.people.map(p=>`<span class="chip">${esc(p.name)}: ${p.outcome||(p.checkedIn?'here ✓':'not yet')}</span>`).join('')||'Nobody has joined yet.'}</p>
+${s.status==='open'?`<button onclick="settle('${s.id}','${h.key}')">End session and settle on PayPal</button>`:'<b>Settled ✨</b>'}</div>`:''}).join('')||'<p class="m">Sessions you host will show up here with your check-in code.</p>'}
+async function ledger(){const l=await api('/api/ledger');$('#led').innerHTML=l.map(e=>{const k=e.t+e.text,n=!seen.has(k);seen.add(k);return `<li class="${n&&seen.size>1?'new':''}">${{hold:'🔒',release:'💚',capture:'💸',payout:'☕',checkin:'📍'}[e.kind]} ${esc(e.text)} <code>${esc(e.ref)}</code></li>`}).join('')||'<li class="m">No activity yet. Join a session to see PayPal at work.</li>'}
+
+const checkin=run(async id=>{await api(`/api/sessions/${id}/checkin`,{name:me,code:$('#c-'+id).value});burst();toast('Checked in. Enjoy your kopi! ☕');await load();ledger()});
+const settle=run(async(id,key)=>{const s0=sessions.find(x=>x.id===id);await api(`/api/sessions/${id}/settle`,{hostKey:key});receipt(s0);burst();toast('Settled. Holds released and no-show deposits paid out.');await load();ledger()});
+$('#host').onsubmit=run(async e=>{e.preventDefault();if(!me)throw new Error('Pop your name in the box at the top first.');const f=new FormData(e.target);let cafe=f.get('cafe');if(cafe==='__other')cafe=f.get('cafe2');const email=f.get('hostEmail');localStorage.setItem('kp_email',email);
+const r=await api('/api/sessions',{title:`${f.get('drink')} with new friends`,cafe,when:f.get('when'),deposit:f.get('deposit'),max:f.get('max'),vibe:f.getAll('vibe').join(', ')||'easygoing',host:me,hostEmail:email});
+hosted.push({id:r.id,key:r.hostKey,code:r.code});localStorage.setItem('kp_hosted',JSON.stringify(hosted));burst();toast('Session is live! Share code '+r.code+' at the café.');load()});
+$('#match').onsubmit=run(async e=>{e.preventDefault();const f=new FormData(e.target);const r=await api('/api/match',{name:me,mood:f.get('mood'),interests:f.getAll('int').join(', ')});pick=r.pick;$('#why').innerHTML=`<p><b>${esc(r.why)}</b>${r.icebreaker?`<br>Try saying: <em>“${esc(r.icebreaker)}”</em>`:''}</p>`;await load();if(pick)burst();$('#list').scrollIntoView({behavior:'smooth'})});
+$('#name').value=me;$('#name').oninput=e=>{me=e.target.value.trim();localStorage.setItem('kp_name',me);hi();load().catch(()=>{})};
+
+function rel(w){const m=Math.round((new Date(w)-Date.now())/6e4);return m<=0?'happening now':m<60?`in ${m} min`:`in ${Math.floor(m/60)}h ${m%60}m`}
+function hi(){const h=+new Date().toLocaleString('en-GB',{hour:'numeric',hourCycle:'h23',timeZone:'Asia/Singapore'});const g=h<5?'Still up? Supper kopi time':h<11?'Good morning':h<15?'Good afternoon':h<18?'Teh-break o’clock':h<22?'Good evening':'Late-night kopi';$('#hi').textContent=`${g}${me?', '+me:''}! ☕`}
+let shown=0;function stats(){const o=sessions.filter(x=>x.status==='open'),k=o.reduce((a,x)=>a+x.people.length,0),held=o.reduce((a,x)=>a+x.people.length*x.deposit,0),c=sessions[0]?.currency||'USD';
+$('#stats').innerHTML=`${o.length} sessions open, <b>${k}</b> kaki joined, <b>${c} <span id="held">${shown.toFixed(2)}</span></b> held on PayPal right now.`;const f0=shown,t0=performance.now();(function f(t){const q=Math.min(1,(t-t0)/700);shown=f0+(held-f0)*q;const e=$('#held');if(e)e.textContent=shown.toFixed(2);if(q<1)requestAnimationFrame(f)})(t0)}
+const talk=['Hi! I’m Kopi. ☕','Don’t shy, go say hi to someone!','Kopi siew dai for me, please!','Aiyo, so ticklish!','Steady lah, you!'];let taps=0;
+function cupTap(){burst();const b=$('#bub');b.textContent=talk[taps++%talk.length];b.classList.remove('on');void b.offsetWidth;b.classList.add('on');clearTimeout(b.h);b.h=setTimeout(()=>b.classList.remove('on'),2600)}
+function rain(){toast('Kopi rain! Steady lah ☕');for(let i=0;i<40;i++)setTimeout(()=>{const b=document.createElement('i');b.className='bean';b.style.left=Math.random()*100+'vw';b.style.top='-20px';document.body.append(b);b.animate([{transform:'translateY(0) rotate(0)'},{transform:`translateY(${innerHeight+40}px) rotate(${Math.random()*720}deg)`}],{duration:1800+Math.random()*1200,easing:'ease-in'}).onfinish=()=>b.remove()},i*60)}
+{const K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];let i=0,w='';addEventListener('keydown',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;i=k===K[i]?i+1:(k===K[0]?1:0);if(i===K.length){i=0;rain()}if(k.length===1&&!/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)){w=(w+k).slice(-4);if(w==='kopi'){w='';rain()}}})}
+{const t=document.title;document.addEventListener('visibilitychange',()=>document.title=document.hidden?'Your kopi is getting cold… ☕':t)}
+function receipt(s){if(!s)return;const c=s.currency,d=s.deposit,no=s.people.filter(p=>!p.checkedIn),pay=no.length*d*.8,r=document.createElement('div');r.className='rcpt-bg';
+r.innerHTML=`<div class="rcpt"><h3>☕ KopiPal receipt</h3><p class="m">${esc(s.title)}<br>${esc(s.cafe)}</p><hr>${s.people.map(p=>`<div class="ln"><span>${esc(p.name)}: ${p.checkedIn?'showed up':'no-show'}</span><b>${p.checkedIn?'hold released':c+' '+d.toFixed(2)+' captured'}</b></div>`).join('')||'<div class="ln"><span>No guests joined</span></div>'}<hr>${no.length?`<div class="ln"><span>Paid to ${esc(s.host)}</span><b>${c} ${pay.toFixed(2)}</b></div><div class="ln"><span>KopiPal share</span><span>${c} ${(no.length*d-pay).toFixed(2)}</span></div>`:`<div class="ln"><span>Everyone came!</span><b>${c} 0.00 charged</b></div>`}<p class="m">Thank you, come again 🧡</p><button onclick="this.closest('.rcpt-bg').remove()">Close</button></div>`;
+r.onclick=e=>{if(e.target===r)r.remove()};document.body.append(r)}
+hi();
+(async()=>{cfg=await api('/api/config');await new Promise((ok,no)=>{const s=document.createElement('script');s.src=`https://www.paypal.com/sdk/js?client-id=${cfg.clientId}&intent=authorize&currency=${cfg.currency}`;s.onload=ok;s.onerror=()=>no(new Error('PayPal SDK failed to load. Check PAYPAL_CLIENT_ID.'));document.head.append(s)});await load();ledger()})().catch(e=>{toast(e.message);load();ledger()});
+setInterval(()=>ledger().catch(()=>{}),6000);
+setInterval(()=>{hi();document.querySelectorAll('.rel').forEach(e=>e.textContent=`(${rel(e.dataset.w)})`)},30000);
+</script></body></html>
